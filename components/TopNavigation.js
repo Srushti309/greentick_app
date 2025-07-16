@@ -256,16 +256,16 @@ const TopNavigation = ({ index, setIndex }) => {
 
   return (
     <>
-      {/* Top Header */}
+     
       <View style={styles.headerWrapper}>
         <View style={styles.statusBarSpacer} />
         <View style={styles.container}>
-          {/* Hamburger */}
+          
           <TouchableOpacity onPress={toggleMenu}>
             <Ionicons name="menu" size={28} color="#fff" />
           </TouchableOpacity>
 
-          {/* Center Title */}
+          
           <View style={styles.centerWrapper}>
             <Text style={styles.centerText}>All News</Text>
           </View>
@@ -274,10 +274,10 @@ const TopNavigation = ({ index, setIndex }) => {
         </View>
       </View>
 
-      {/* Slide-in Drawer */}
+      
       {menuVisible && (
         <View style={StyleSheet.absoluteFillObject}>
-          {/* Dark Overlay - press to close */}
+         
           <Pressable style={styles.overlay} onPress={toggleMenu} />
 
           <Animated.View style={[styles.drawer, { transform: [{ translateX: slideAnim }] }]}>

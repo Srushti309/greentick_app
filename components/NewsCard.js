@@ -71,7 +71,6 @@ const NewsCard = ({ item }) => {
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={openDetail}>
       <View style={styles.card}>
-        {/* TOP IMAGE */}
         <View style={styles.imageContainer}>
           <Image
             source={{ uri: item.image }}
@@ -80,24 +79,23 @@ const NewsCard = ({ item }) => {
           />
         </View>
 
-        {/* TITLE */}
-        <Text style={styles.title} numberOfLines={3}>
-          {item.title}
-        </Text>
+        <Text style={styles.title}>{item.title}</Text>
 
-        {/* DATE */}
-        <View style={styles.dateRow}>
-          <Ionicons name="calendar-outline" size={16} color="green" />
-          <Text style={styles.dateText}>Jul 11, 2025</Text> {/* Replace with item.date if dynamic */}
+        <View style={styles.metaRow}>
+          <Text style={styles.authorText}>By {item.author}</Text>
+          <View style={styles.dateRow}>
+            <Ionicons name="calendar-outline" size={16} color="green" />
+            <Text style={styles.dateText}>{item.date || "Unknown Date"}</Text>
+          </View>
         </View>
 
-        {/* CONTENT */}
-        <Text style={styles.content} numberOfLines={7}>
-          {item.content}
-        </Text>
+        {item.affiliations && (
+          <Text style={styles.affiliations}>{item.affiliations}</Text>
+        )}
 
-        {/* READ MORE */}
-        <Text style={styles.readMore}>Read full story →</Text>
+        <Text style={styles.content}>{item.content}</Text>
+
+        {/*<Text style={styles.readMore}>Read full story →</Text>*/}
       </View>
     </TouchableOpacity>
   );
@@ -118,7 +116,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
   },
   imageContainer: {
-    height: 250,
+    height: 360,
     width: "100%",
     borderRadius: 12,
     overflow: "hidden",
@@ -128,23 +126,41 @@ const styles = StyleSheet.create({
   image: {
     height: "100%",
     width: "100%",
+    borderRadius: 12,
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold",
+    fontSize: 22,
+    fontWeight: "900",
     color: "#222",
-    marginBottom: 6,
+    marginBottom: 12,
   },
-  dateRow: {
-    flexDirection: "row",
-    alignItems: "center",
+ metaRow: {
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+  marginBottom: 12,
+},
+authorText: {
+  fontSize: 16,
+  color: "#007FFF",
+  fontWeight: "500",
+},
+ affiliations: {
+    fontSize: 18,
+    fontWeight: "300",
+    color: "green",
     marginBottom: 10,
   },
-  dateText: {
-    fontSize: 14,
-    color: "gray",
-    marginLeft: 6,
-  },
+dateRow: {
+  flexDirection: "row",
+  alignItems: "center",
+},
+dateText: {
+  fontSize: 16,
+  color: "gray",
+  marginLeft: 6,
+},
+
   content: {
     fontSize: 15,
     color: "#444",
@@ -157,5 +173,3 @@ const styles = StyleSheet.create({
     fontStyle: "italic",
   },
 });
-
-

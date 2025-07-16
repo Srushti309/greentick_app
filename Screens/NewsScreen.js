@@ -18,24 +18,30 @@ const NewsScreen = () => {
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
 
-  const fetchNews = async () => {
-    try {
-      const response = await fetch("https://dummyjson.com/posts");
-      const json = await response.json();
+const fetchNews = async () => {
+  try {
+    const response = await fetch("https://greentick.taxsutra.com/api/get-expert-article");
+    const json = await response.json();
 
-      const withImages = json.posts.map((post, index) => ({
-        title: post.title,
-        content: post.body,
-        image: `https://source.unsplash.com/random/400x300?sig=${index}`,
-      }));
+    const formattedData = json.map((post, index) => ({
+      title: post.topic_title,
+      //content: post.preview_content,
+      date: post.date_of_publishing,
+      author: post.author_data?.[0]?.name ,
+      affiliations: post.author_data?.[0]?.affiliations ,
+      image: post.author_data?.[0]?.url
+        ? `https://greentick.taxsutra.com/upload/authors/${post.author_data[0].url}`
+        : "https://via.placeholder.com/400x300.png?text=No+Image",
+    }));
 
-      setNewsData(withImages);
-      setLoading(false);
-    } catch (error) {
-      console.error("Error fetching news:", error);
-      setLoading(false);
-    }
-  };
+    setNewsData(formattedData);
+    setLoading(false);
+  } catch (error) {
+    console.error("❌ Error fetching news:", error);
+    setLoading(false);
+  }
+};
+
 
   useEffect(() => {
     fetchNews();
